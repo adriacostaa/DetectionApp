@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnCam, btnLista;
+    Button btnCam, btnLista, btnPres;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnCam = (Button)findViewById(R.id.btn_cam);
         btnLista = (Button)findViewById(R.id.btn_lista);
+        btnPres = (Button)findViewById(R.id.btn_pres);
 
         btnCam.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -54,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (MainActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnPres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (MainActivity.this, PresentationActivity.class);
                 startActivity(intent);
             }
         });

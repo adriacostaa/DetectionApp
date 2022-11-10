@@ -39,17 +39,18 @@ public class ViewAnimation {
 
     public static void ShowOut(final View v){
         v.setVisibility(View.VISIBLE);
-        v.setAlpha(0f);
-        v.setTranslationY(v.getHeight());
+        v.setAlpha(1f);
+        v.setTranslationY(0);
         v.animate()
                 .setDuration(200)
-                .translationY(0)
+                .translationY(v.getHeight())
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation, boolean isReverse) {
-                        super.onAnimationEnd(animation, isReverse);
+                        v.setVisibility(View.GONE);
+                        super.onAnimationEnd(animation);
                     }
-                }).alpha(1f)
+                }).alpha(0f)
                 .start();
     }
 

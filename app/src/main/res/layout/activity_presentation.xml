@@ -15,9 +15,9 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/dark_30"
         android:clickable="true"
-        android:fitsSystemWindows="true"
-        android:background="@color/dark_30"/>
+        android:fitsSystemWindows="true" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,37 +33,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_cam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginLeft="18dp"
                 android:layout_gravity="center_vertical|end|right"
-                android:layout_margin="10dp"
-                android:background="@color/white"
-                app:cardElevation="2dp"
-                app:cardCornerRadius="3dp"
-                app:contentPadding="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="camera"
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:gravity="center"/>
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_cam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="18dp"
-                    android:layout_marginLeft="18dp"
-                    android:clickable="true"
-                    android:tint="@color/grey_80"
-                    app:fabSize="mini"
-                    app:rippleColor="@color/black"
-                    app:borderWidth="0dp"
-                    android:src="@drawable/ic_photo_cam"
-                    android:backgroundTint="@color/white"/>
-            </androidx.cardview.widget.CardView>
+                android:clickable="true"
+                android:tint="@color/green_10"
+                app:fabSize="mini"
+                app:rippleColor="@color/black"
+                app:borderWidth="0dp"
+                android:src="@drawable/ic_photo_cam"
+                android:backgroundTint="@color/white"/>
         </LinearLayout>
 
         <LinearLayout
@@ -72,37 +57,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_info"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end|right"
-                android:layout_margin="10dp"
-                android:background="@color/white"
-                app:cardElevation="2dp"
-                app:cardCornerRadius="3dp"
-                app:contentPadding="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="info"
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:gravity="center"/>
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="18dp"
-                    android:layout_marginLeft="18dp"
-                    android:clickable="true"
-                    android:tint="@color/grey_80"
-                    app:fabSize="mini"
-                    app:rippleColor="@color/black"
-                    app:borderWidth="0dp"
-                    android:src="@drawable/ic_info"
-                    android:backgroundTint="@color/white"/>
-            </androidx.cardview.widget.CardView>
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:src="@drawable/ic_info"
+                android:tint="@color/green_10"
+                app:borderWidth="0dp"
+                app:fabSize="mini"
+                app:rippleColor="@color/white" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -114,12 +84,12 @@
             android:layout_marginRight="18dp"
             android:layout_marginLeft="18dp"
             android:clickable="true"
-            app:tint="@color/grey_80"
+            app:tint="@color/white"
             app:fabSize="normal"
             app:rippleColor="@color/black"
             app:borderWidth="0dp"
             android:src="@drawable/ic_add"
-            app:backgroundTint="@color/black"/>
+            app:backgroundTint="@color/green_10"/>
 
     </LinearLayout>
 </RelativeLayout>
