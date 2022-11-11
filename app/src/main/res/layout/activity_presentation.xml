@@ -9,7 +9,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/back"
@@ -17,17 +19,26 @@
         android:layout_height="match_parent"
         android:background="@color/dark_30"
         android:clickable="true"
-        android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true" >
+
+    </androidx.viewpager.widget.ViewPager>
 
     <TextView
+        android:id="@+id/title_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="UARANÁ APP"
+        android:layout_centerInParent="true"
         android:fontFamily="@font/roboto_bold"
-        android:textSize="30sp"
-        android:id="@+id/title_app"
-        android:layout_centerInParent="true"/>
+        android:text="UARANÁ APP"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="170sp"
+        android:layout_height="170sp"
+        app:srcCompat="@drawable/guarana"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
