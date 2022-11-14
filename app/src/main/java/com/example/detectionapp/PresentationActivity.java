@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PresentationActivity extends AppCompatActivity {
 
-    private View backDrop, btnCamera, btnInfo;
+    private View btnCamera, btnInfo;
     private boolean rotate = false;
 
     @Override
@@ -31,8 +31,6 @@ public class PresentationActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        backDrop = findViewById(R.id.back);
-
         final FloatingActionButton fabCam = findViewById(R.id.fab_cam);
         final FloatingActionButton fabInfo = findViewById(R.id.fab_info);
         final FloatingActionButton fabAdd = findViewById(R.id.fab_add);
@@ -42,19 +40,11 @@ public class PresentationActivity extends AppCompatActivity {
 
         ViewAnimation.initShowOut(btnCamera);
         ViewAnimation.initShowOut(btnInfo);
-        backDrop.setVisibility(View.GONE);
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggleFabMode(view);
-            }
-        });
-
-        backDrop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleFabMode(fabAdd);
             }
         });
 
@@ -66,6 +56,11 @@ public class PresentationActivity extends AppCompatActivity {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, 1);
+                    //capturar imagem
+                    //registrar imagem no banco
+                    //chamar prox activity com imagem carregada + informacoes sobre
+                    Intent intent = new Intent (PresentationActivity.this, HomeActivity.class);
+                    startActivity(intent);
                 } else {
                     //Request camera permission if we don't have it.
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
@@ -86,11 +81,9 @@ public class PresentationActivity extends AppCompatActivity {
         if(rotate){
             ViewAnimation.ShowIn(btnCamera);
             ViewAnimation.ShowIn(btnInfo);
-            backDrop.setVisibility(View.VISIBLE);
         }else{
             ViewAnimation.ShowOut(btnCamera);
             ViewAnimation.ShowOut(btnInfo);
-            backDrop.setVisibility(View.GONE);
         }
     }
 }
