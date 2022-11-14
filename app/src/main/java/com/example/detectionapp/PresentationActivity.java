@@ -56,11 +56,6 @@ public class PresentationActivity extends AppCompatActivity {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, 1);
-                    //capturar imagem
-                    //registrar imagem no banco
-                    //chamar prox activity com imagem carregada + informacoes sobre
-                    Intent intent = new Intent (PresentationActivity.this, HomeActivity.class);
-                    startActivity(intent);
                 } else {
                     //Request camera permission if we don't have it.
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
