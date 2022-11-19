@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView imageView;
     Button picture;
     int imageSize = 224;
+    private static final int pic_id=123;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,21 +48,31 @@ public class HomeActivity extends AppCompatActivity {
         confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
         picture = findViewById(R.id.button);
+        Bundle extras = getIntent().getExtras();
 
-        picture.setOnClickListener(new View.OnClickListener() {
+        if (extras != null) {
+            Bitmap image = (Bitmap) extras.get("image");
+            if (image != null) {
+                int dimension = Math.min(image.getWidth(), image.getHeight());
+                image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
+                imageView.setImageBitmap(image);
+            }
+        }
+
+       /* picture.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
                 // Launch camera if we have permission
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, 1);
+                    startActivityForResult(cameraIntent, pic_id);
                 } else {
                     //Request camera permission if we don't have it.
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
                 }
             }
-        });
+        });*/
     }
 
     public void classifyImage(Bitmap image){
@@ -119,11 +130,10 @@ public class HomeActivity extends AppCompatActivity {
             // TODO Handle the exception
         }
     }
-
-
-    @Override
+    
+   /* @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 1 && resultCode == RESULT_OK) {
+        if (requestCode == pic_id && resultCode == RESULT_OK) {
             Bitmap image = (Bitmap) data.getExtras().get("data");
             int dimension = Math.min(image.getWidth(), image.getHeight());
             image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
@@ -133,5 +143,5 @@ public class HomeActivity extends AppCompatActivity {
             classifyImage(image);
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 }
