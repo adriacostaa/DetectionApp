@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private View btnCamera, btnInfo;
     private boolean rotate = false;
-    private static final int pic_id= 1;
+    private static final int pic_id = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
