@@ -75,6 +75,9 @@ public class HomeActivity extends AppCompatActivity {
                 int dimension = Math.min(image.getWidth(), image.getHeight());
                 image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
                 imageView.setImageBitmap(image);
+                
+                image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
+                classifyImage(image);
             }
         }
     }
