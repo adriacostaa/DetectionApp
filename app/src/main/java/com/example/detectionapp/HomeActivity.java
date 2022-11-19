@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
 
     TextView result, confidence;
     ImageView imageView;
-    Button picture;
+    Button newImage;
     int imageSize = 224;
     private static final int pic_id=123;
 
@@ -47,19 +47,11 @@ public class HomeActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
-        picture = findViewById(R.id.button);
-        Bundle extras = getIntent().getExtras();
+        newImage = findViewById(R.id.button);
 
-        if (extras != null) {
-            Bitmap image = (Bitmap) extras.get("image");
-            if (image != null) {
-                int dimension = Math.min(image.getWidth(), image.getHeight());
-                image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
-                imageView.setImageBitmap(image);
-            }
-        }
+        loadImageInitial();
 
-       /* picture.setOnClickListener(new View.OnClickListener() {
+        newImage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
@@ -72,7 +64,19 @@ public class HomeActivity extends AppCompatActivity {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
                 }
             }
-        });*/
+        });
+    }
+
+    private void loadImageInitial(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Bitmap image = (Bitmap) extras.get("image");
+            if (image != null) {
+                int dimension = Math.min(image.getWidth(), image.getHeight());
+                image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
+                imageView.setImageBitmap(image);
+            }
+        }
     }
 
     public void classifyImage(Bitmap image){
@@ -131,7 +135,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
     
-   /* @Override
+   @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == pic_id && resultCode == RESULT_OK) {
             Bitmap image = (Bitmap) data.getExtras().get("data");
@@ -143,5 +147,5 @@ public class HomeActivity extends AppCompatActivity {
             classifyImage(image);
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }*/
+    }
 }
