@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.detectionapp.ml.ModelAnimals;
 import com.example.detectionapp.ml.ModelBoat;
 
 import org.tensorflow.lite.DataType;
@@ -88,7 +89,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void classifyImage(Bitmap image){
         try {
-            ModelBoat model = ModelBoat.newInstance(getApplicationContext());
+            //ModelBoat model = ModelBoat.newInstance(getApplicationContext());
+            ModelAnimals model = ModelAnimals.newInstance(getApplicationContext());
 
             // Creates inputs for reference.
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
@@ -113,7 +115,8 @@ public class HomeActivity extends AppCompatActivity {
             inputFeature0.loadBuffer(byteBuffer);
 
             // Runs model inference and gets result.
-            ModelBoat.Outputs outputs = model.process(inputFeature0);
+            //ModelBoat.Outputs outputs = model.process(inputFeature0);
+            ModelAnimals.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
             float[] confidences = outputFeature0.getFloatArray();
@@ -126,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"Barco", "Negativo"};
+            String[] classes = {"Onça", "Iguana", "Tucano"};
             result.setText(classes[maxPos]);
 
             String s = "";
