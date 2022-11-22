@@ -114,8 +114,7 @@ public class HomeActivity extends AppCompatActivity {
 
             inputFeature0.loadBuffer(byteBuffer);
 
-            // Runs model inference and gets result.
-            //ModelBoat.Outputs outputs = model.process(inputFeature0);
+            // Runs model inference and gets result
             ModelAnimals.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 

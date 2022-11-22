@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1068144064164",
+    "project_id": "uarana-47f5f",
+    "storage_bucket": "uarana-47f5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068144064164:android:b922dc07281d5786da5831",
+        "android_client_info": {
+          "package_name": "com.example.detectionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068144064164-d5vdp7d3sf48tlp9s3qerpo6ovd28ond.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU1JfMef1suUZxDNYU4NJcj2UA5M4LBFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068144064164-d5vdp7d3sf48tlp9s3qerpo6ovd28ond.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
