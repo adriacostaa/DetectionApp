@@ -1,5 +1,8 @@
 package com.example.detectionapp;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,19 +15,30 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity {
 
-    private View btnCamera, btnInfo;
+    private View btnCamera, btnInfo, btnListar;
+    private TextView txtListar;
     private boolean rotate = false;
     private static final int pic_id = 1;
+    private FirebaseFirestore firestore;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnCamera = findViewById(R.id.btn_camera);
         btnInfo = findViewById(R.id.btn_info);
+        btnListar = findViewById(R.id.btn_listar);
+        txtListar = findViewById(R.id.txt_listar);
 
         ViewAnimation.initShowOut(btnCamera);
         ViewAnimation.initShowOut(btnInfo);
@@ -64,6 +80,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"Informacoes sobre o App", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnListar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Listar", Toast.LENGTH_SHORT).show();
+                lerDados();
+
+            }
+        });
+    }
+
+    void lerDados(){
+        firestore = FirebaseFirestore.getInstance();
+        DocumentReference docRef = firestore.collection("animal").document("01");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String informativo = String.valueOf(document.getData());
+                        txtListar.setText(informativo);
+                        Log.d(TAG, "DocumentSnapshot data: " + informativo);
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
             }
         });
     }
