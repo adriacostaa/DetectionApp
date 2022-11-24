@@ -87,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Listar", Toast.LENGTH_SHORT).show();
-                lerDados();
+                retornarDados();
 
             }
         });
     }
 
-    void lerDados(){
+    void retornarDados(){
         firestore = FirebaseFirestore.getInstance();
         DocumentReference docRef = firestore.collection("animal").document("01");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

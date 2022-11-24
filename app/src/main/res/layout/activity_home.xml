@@ -57,5 +57,15 @@
         android:id="@+id/confidence"
         android:layout_below="@+id/result"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="@color/purple_200"
+        android:textSize="22sp"
+        android:id="@+id/informativo"
+        android:layout_below="@+id/confidence"
+        />
 
 </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.example.detectionapp;
 
+import static android.content.ContentValues.TAG;
 import static com.example.detectionapp.R.id.result;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +25,11 @@ import android.widget.TextView;
 
 import com.example.detectionapp.ml.ModelAnimals;
 import com.example.detectionapp.ml.ModelBoat;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.schema.Model;
@@ -33,11 +41,12 @@ import java.nio.ByteOrder;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView result, confidence;
+    TextView result, confidence, txtInformativo;
     ImageView imageView;
     Button newImage;
     int imageSize = 224;
     private static final int pic_id=123;
+    private FirebaseFirestore firestore;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -53,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
         confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
         newImage = findViewById(R.id.button);
+        txtInformativo = findViewById(R.id.informativo);
 
         loadImageInitial();
 
@@ -128,20 +138,46 @@ public class HomeActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"Onça", "Iguana", "Tucano"};
+            String[] classes = {"Iguana", "Tucano", "Onça"};
+
+            if(classes[maxPos].equals(classes[0])){
+                lerDados("01");
+            }
             result.setText(classes[maxPos]);
 
-            String s = "";
+            /*String s = "";
             for(int i = 0; i < classes.length; i++){
                 s += String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100);
             }
-            confidence.setText(s);
+            confidence.setText(s);*/
 
             // Releases model resources if no longer used.
             model.close();
         } catch (IOException e) {
             // TODO Handle the exception
         }
+    }
+
+    void lerDados(String param){
+        firestore = FirebaseFirestore.getInstance();
+        DocumentReference docRef = firestore.collection("animal").document(param);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String inf = String.valueOf(document.getData());
+                        txtInformativo.setText(inf);
+                        Log.d(TAG, "*LER DADOSSS* DocumentSnapshot data: " + inf);
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
     }
     
    @Override
