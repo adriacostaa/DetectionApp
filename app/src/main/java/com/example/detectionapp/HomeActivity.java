@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         result = findViewById(R.id.result);
-        confidence = findViewById(R.id.confidence);
+        //confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
         newImage = findViewById(R.id.button);
         txtInformativo = findViewById(R.id.informativo);

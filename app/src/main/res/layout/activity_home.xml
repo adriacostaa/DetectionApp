@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Classificação: "
+        android:text=" "
         android:textStyle="bold"
         android:textSize="20sp"
         android:fontFamily="@font/roboto_bold"
@@ -39,33 +39,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
         android:text=""
         android:textColor="#C30000"
         android:textStyle="bold"
         android:textSize="27sp"
         android:id="@+id/result"
         android:layout_below="@+id/classified"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text=""
-        android:textColor="#000"
-        android:textSize="22sp"
-        android:id="@+id/confidence"
-        android:layout_below="@+id/result"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:text=""
         android:textSize="22sp"
         android:id="@+id/informativo"
-        android:layout_below="@+id/confidence"
+        android:layout_below="@+id/result"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
         />
 
 </RelativeLayout>
