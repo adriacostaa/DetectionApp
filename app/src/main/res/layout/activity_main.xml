@@ -31,23 +31,6 @@
         android:layout_marginTop="180sp"
         app:srcCompat="@drawable/logotipo_guarana" />
 
-    <Button
-        android:id="@+id/btn_listar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_app"
-        android:layout_centerHorizontal="true"
-        android:text="Listar"/>
-
-    <TextView
-        android:id="@+id/txt_listar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:layout_below="@+id/btn_listar"/>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

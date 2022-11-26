@@ -27,9 +27,13 @@ import com.example.detectionapp.ml.ModelAnimals;
 import com.example.detectionapp.ml.ModelBoat;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.schema.Model;
@@ -138,18 +142,18 @@ public class HomeActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"Iguana", "Tucano", "Onça"};
-
+            String[] classes = {"Onça", "Iguana", "Tucano"};
             if(classes[maxPos].equals(classes[0])){
-                lerDados("01");
+                result.setText(classes[maxPos]);
+                lerDados();
             }
-            result.setText(classes[maxPos]);
 
-            /*String s = "";
+
+            String s = "";
             for(int i = 0; i < classes.length; i++){
                 s += String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100);
             }
-            confidence.setText(s);*/
+            confidence.setText(s);
 
             // Releases model resources if no longer used.
             model.close();
@@ -158,18 +162,18 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    void lerDados(String param){
+    void lerDados(){
         firestore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = firestore.collection("animal").document(param);
+        DocumentReference docRef = firestore.collection("animal").document("01");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        String inf = String.valueOf(document.getData());
-                        txtInformativo.setText(inf);
-                        Log.d(TAG, "*LER DADOSSS* DocumentSnapshot data: " + inf);
+                        String informativo = document.getString("informativo");
+                        txtInformativo.setText(informativo);
+                        Log.d(TAG, "DocumentSnapshot data: " + informativo);
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -179,7 +183,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-    
+
    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == pic_id && resultCode == RESULT_OK) {

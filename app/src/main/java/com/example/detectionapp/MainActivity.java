@@ -32,13 +32,9 @@ import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity {
 
-    private View btnCamera, btnInfo, btnListar;
-    private TextView txtListar;
+    private View btnCamera, btnInfo;
     private boolean rotate = false;
     private static final int pic_id = 1;
-    private FirebaseFirestore firestore;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnCamera = findViewById(R.id.btn_camera);
         btnInfo = findViewById(R.id.btn_info);
-        btnListar = findViewById(R.id.btn_listar);
-        txtListar = findViewById(R.id.txt_listar);
 
         ViewAnimation.initShowOut(btnCamera);
         ViewAnimation.initShowOut(btnInfo);
@@ -83,37 +77,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnListar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Listar", Toast.LENGTH_SHORT).show();
-                retornarDados();
-
-            }
-        });
     }
 
-    void retornarDados(){
-        firestore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = firestore.collection("animal").document("01");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String informativo = String.valueOf(document.getData());
-                        txtListar.setText(informativo);
-                        Log.d(TAG, "DocumentSnapshot data: " + informativo);
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void sendImage(View view){
