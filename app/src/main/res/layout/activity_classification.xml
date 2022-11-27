@@ -58,7 +58,7 @@
         android:layout_marginBottom="65dp"
         android:text="Saiba mais"
         android:textAllCaps="false"
-        android:textSize="21sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="@color/green_10"
         android:layout_centerHorizontal="true"/>
@@ -71,7 +71,7 @@
         android:layout_centerInParent="true"
         android:text="Novo Objeto"
         android:textAllCaps="false"
-        android:textSize="21sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="@color/green_10" />
 
