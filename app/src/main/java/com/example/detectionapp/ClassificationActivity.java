@@ -38,9 +38,9 @@ import java.nio.ByteOrder;
 
 public class ClassificationActivity extends AppCompatActivity {
 
-    TextView result, confidence, txtInformation;
+    TextView result, txtInformation;
     ImageView imageView;
-    Button newImage;
+    Button btnNewImage;
     int imageSize = 224;
     private static final int pic_id=123;
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();;
@@ -57,14 +57,14 @@ public class ClassificationActivity extends AppCompatActivity {
         }
 
         result = findViewById(R.id.result);
-        //confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
-        newImage = findViewById(R.id.button);
+        btnNewImage = findViewById(R.id.button);
+        txtInformation = findViewById(R.id.txt_information);
         txtInformation = findViewById(R.id.txt_information);
 
         loadImageInitial();
 
-        newImage.setOnClickListener(new View.OnClickListener() {
+        btnNewImage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
