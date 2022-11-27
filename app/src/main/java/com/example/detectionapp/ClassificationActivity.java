@@ -1,7 +1,6 @@
 package com.example.detectionapp;
 
 import static android.content.ContentValues.TAG;
-import static com.example.detectionapp.R.id.result;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,39 +23,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.detectionapp.ml.ModelAnimals;
-import com.example.detectionapp.ml.ModelBoat;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import org.tensorflow.lite.DataType;
-import org.tensorflow.lite.schema.Model;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class HomeActivity extends AppCompatActivity {
+public class ClassificationActivity extends AppCompatActivity {
 
-    TextView result, confidence, txtInformativo;
+    TextView result, confidence, txtInformation;
     ImageView imageView;
     Button newImage;
     int imageSize = 224;
     private static final int pic_id=123;
-    private FirebaseFirestore firestore;
+    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_classification);
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -66,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         //confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
         newImage = findViewById(R.id.button);
-        txtInformativo = findViewById(R.id.informativo);
+        txtInformation = findViewById(R.id.txt_information);
 
         loadImageInitial();
 
@@ -142,17 +136,10 @@ public class HomeActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"Onça", "Iguana", "Tucano"};
-            if(classes[maxPos].equals(classes[0])){
-                result.setText(classes[maxPos]);
-                lerDados();
-            }
 
-            /*String s = "";
-            for(int i = 0; i < classes.length; i++){
-                s += String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100);
-            }
-            confidence.setText(s);*/
+            String[] classes = {"Onça", "Iguana", "Tucano"};
+            getDocument(String.valueOf(maxPos));
+            result.setText(classes[maxPos]);
 
             // Releases model resources if no longer used.
             model.close();
@@ -161,18 +148,17 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    void lerDados(){
-        firestore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = firestore.collection("animal").document("01");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    void getDocument(String param){
+        DocumentReference animalRef = firestore.collection("animal").document(param);
+        animalRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        String informativo = document.getString("informativo");
-                        txtInformativo.setText(informativo);
-                        Log.d(TAG, "DocumentSnapshot data: " + informativo);
+                        String information = document.getString("information");
+                        txtInformation.setText(information);
+                        Log.d(TAG, "DocumentSnapshot data: " + information);
                     } else {
                         Log.d(TAG, "No such document");
                     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".ClassificationActivity">
 
     <Button
         android:id="@+id/button"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="22sp"
-        android:id="@+id/informativo"
+        android:id="@+id/txt_information"
         android:layout_below="@+id/result"
         android:gravity="center"
         android:layout_centerHorizontal="true"
