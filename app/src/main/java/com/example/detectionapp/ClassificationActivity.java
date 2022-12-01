@@ -40,7 +40,7 @@ public class ClassificationActivity extends AppCompatActivity {
 
     TextView result, txtInformation;
     ImageView imageView;
-    Button btnNewImage;
+    Button btnNewImage, btnMoreInfo;
     int imageSize = 224;
     private static final int pic_id=123;
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();;
@@ -51,7 +51,6 @@ public class ClassificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classification);
 
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -59,6 +58,7 @@ public class ClassificationActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         imageView = findViewById(R.id.imageView);
         btnNewImage = findViewById(R.id.button);
+        btnMoreInfo = findViewById(R.id.btn_more_info);
         txtInformation = findViewById(R.id.txt_information);
         txtInformation = findViewById(R.id.txt_information);
 
@@ -76,6 +76,14 @@ public class ClassificationActivity extends AppCompatActivity {
                     //Request camera permission if we don't have it.
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
                 }
+            }
+        });
+
+        btnMoreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ClassificationActivity.this, MoreInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
