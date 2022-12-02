@@ -27,7 +27,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
@@ -158,24 +160,22 @@ public class ClassificationActivity extends AppCompatActivity {
 
     void getDocument(String param){
         DocumentReference animalRef = firestore.collection("animal").document(param);
-        animalRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        EventListener eventListener = new EventListener<DocumentSnapshot>(){
+
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String information = document.getString("information");
-                        txtInformation.setText(information);
-                        Log.d(TAG, "DocumentSnapshot data: " + information);
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
+            public void onEvent(@Nullable DocumentSnapshot document, @Nullable FirebaseFirestoreException error) {
+                if (document.exists()) {
+                    String short_info = document.getString("short_info");
+                    txtInformation.setText(short_info);
+                    Log.d(TAG, "****SHORT INFO**** " + short_info);
                 } else {
-                    Log.d(TAG, "get failed with ", task.getException());
+                    Log.d(TAG, "No such document");
                 }
             }
-        });
+        };
+        animalRef.addSnapshotListener(eventListener);
     }
+
 
    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
