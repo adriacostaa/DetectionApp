@@ -37,7 +37,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:fontFamily="@font/roboto_bold"
-        android:text="teste"
+        android:text=" "
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_below="@+id/mi_title"/>
