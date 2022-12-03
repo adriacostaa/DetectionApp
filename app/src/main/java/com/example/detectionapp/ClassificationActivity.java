@@ -45,7 +45,8 @@ public class ClassificationActivity extends AppCompatActivity {
     Button btnNewImage, btnMoreInfo;
     int imageSize = 224;
     private static final int pic_id=123;
-    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();;
+    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    int position;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -85,6 +86,7 @@ public class ClassificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ClassificationActivity.this, MoreInfoActivity.class);
+                intent.putExtra("position", String.valueOf(position));
                 startActivity(intent);
             }
         });
@@ -148,7 +150,8 @@ public class ClassificationActivity extends AppCompatActivity {
             }
 
             String[] classes = {"Onça", "Iguana", "Tucano"};
-            getAnimalListener(String.valueOf(maxPos));
+            position = maxPos;
+            getAnimalListener(String.valueOf(position));
             result.setText(classes[maxPos]);
 
             // Releases model resources if no longer used.
@@ -174,6 +177,11 @@ public class ClassificationActivity extends AppCompatActivity {
             }
         };
         animalRef.addSnapshotListener(eventListener);
+    }
+
+    void resultMaxPosition( ){
+
+
     }
 
 
