@@ -148,7 +148,7 @@ public class ClassificationActivity extends AppCompatActivity {
             }
 
             String[] classes = {"Onça", "Iguana", "Tucano"};
-            getDocument(String.valueOf(maxPos));
+            getAnimalListener(String.valueOf(maxPos));
             result.setText(classes[maxPos]);
 
             // Releases model resources if no longer used.
@@ -158,7 +158,7 @@ public class ClassificationActivity extends AppCompatActivity {
         }
     }
 
-    void getDocument(String param){
+    void getAnimalListener(String param){
         DocumentReference animalRef = firestore.collection("animal").document(param);
         EventListener eventListener = new EventListener<DocumentSnapshot>(){
 
