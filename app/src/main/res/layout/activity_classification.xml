@@ -45,6 +45,7 @@
         android:textSize="22sp"
         android:id="@+id/txt_information"
         android:layout_below="@+id/result"
+        android:fontFamily="@font/roboto_regular"
         android:gravity="center"
         android:layout_centerHorizontal="true"
         />
@@ -59,7 +60,7 @@
         android:text="Saiba mais"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
         app:backgroundTint="@color/green_10"
         android:layout_centerHorizontal="true"/>
 
@@ -68,11 +69,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
         android:text="Novo Objeto"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/green_10" />
+        android:fontFamily="@font/roboto_bold"
+        app:backgroundTint="@color/green_10"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

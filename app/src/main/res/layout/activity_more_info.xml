@@ -51,10 +51,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/roboto_regular"
                 android:text="teste more info "
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_below="@+id/mi_title"/>
         </LinearLayout>
     </ScrollView>
