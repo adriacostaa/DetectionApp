@@ -179,12 +179,6 @@ public class ClassificationActivity extends AppCompatActivity {
         animalRef.addSnapshotListener(eventListener);
     }
 
-    void resultMaxPosition( ){
-
-
-    }
-
-
    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == pic_id && resultCode == RESULT_OK) {
