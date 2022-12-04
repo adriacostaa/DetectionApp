@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +32,7 @@ public class MoreInfoActivity extends AppCompatActivity {
     List<Image> imageList;
     SliderAdapter sliderAdapter;
     TextView txtTitle, txtInformation;
+    ImageSlider imgSlider;
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Override
@@ -62,7 +66,8 @@ public class MoreInfoActivity extends AppCompatActivity {
                         Log.d(TAG, "****URL****" + url_img1);
                         Log.d(TAG, "****URL****" + url_img2);
                         Log.d(TAG, "****URL****" + url_img3);
-                        confgSliderImage(title, information, url_img1, url_img2,url_img3);
+                        //confgSliderImage(title, information, url_img1, url_img2,url_img3);
+                        confgSliderImage2(title, information, url_img1, url_img2,url_img3);
 
                     } else {
                         Log.d(TAG, "No such document");
@@ -74,7 +79,7 @@ public class MoreInfoActivity extends AppCompatActivity {
     }
 
     private void confgSliderImage(String title, String information, String imgUrl1, String imgUrl2, String imgUrl3){
-        viewPager2 = findViewById(R.id.viewPager);
+        //viewPager2 = findViewById(R.id.viewPager);
         txtTitle = findViewById(R.id.mi_title);
         txtInformation = findViewById(R.id.mi_information);
 
@@ -88,5 +93,22 @@ public class MoreInfoActivity extends AppCompatActivity {
 
         sliderAdapter = new SliderAdapter(imageList,this);
         viewPager2.setAdapter(sliderAdapter);
+    }
+
+    private void confgSliderImage2(String title, String information, String imgUrl1, String imgUrl2, String imgUrl3){
+        imgSlider = findViewById(R.id.img_slider);
+        //viewPager2 = findViewById(R.id.viewPager);
+        txtTitle = findViewById(R.id.mi_title);
+        txtInformation = findViewById(R.id.mi_information);
+
+        txtTitle.setText(title);
+        txtInformation.setText(information);
+
+        ArrayList<SlideModel>sliderimgs = new ArrayList<>();
+        sliderimgs.add(new SlideModel(imgUrl1,null));
+        sliderimgs.add(new SlideModel(imgUrl2, null));
+        sliderimgs.add(new SlideModel(imgUrl3, null));
+
+        imgSlider.setImageList(sliderimgs, ScaleTypes.CENTER_CROP);
     }
 }
