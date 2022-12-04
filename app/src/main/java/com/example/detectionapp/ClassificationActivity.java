@@ -110,7 +110,6 @@ public class ClassificationActivity extends AppCompatActivity {
 
     public void classifyImage(Bitmap image){
         try {
-            //ModelBoat model = ModelBoat.newInstance(getApplicationContext());
             ModelAnimals model = ModelAnimals.newInstance(getApplicationContext());
 
             // Creates inputs for reference.
