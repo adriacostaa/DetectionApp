@@ -67,13 +67,13 @@ public class MoreInfoActivity extends AppCompatActivity {
         }
     }
 
-    private void confgSliderImage(String title, String information, String imgUrl1, String imgUrl2, String imgUrl3){
+    private void confgSliderImage(String title, String info, String imgUrl1, String imgUrl2, String imgUrl3){
         imgSlider = findViewById(R.id.img_slider);
         txtTitle = findViewById(R.id.mi_title);
         txtInformation = findViewById(R.id.mi_information);
 
         txtTitle.setText(title);
-        txtInformation.setText(information);
+        txtInformation.setText(info);
 
         ArrayList<SlideModel>sliderimgs = new ArrayList<>();
         sliderimgs.add(new SlideModel(imgUrl1,null));

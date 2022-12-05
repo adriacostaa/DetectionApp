@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                sendImage();
+                openCamera();
             }
         });
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void sendImage(){
+    public void openCamera(){
         // Launch camera if we have permission
         if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
